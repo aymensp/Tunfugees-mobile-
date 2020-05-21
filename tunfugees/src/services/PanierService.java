@@ -26,6 +26,7 @@ import java.util.Map;
  */
 public class PanierService {
     ArrayList<Panier> listAnnoncep = new ArrayList<>();
+    private boolean responseResult;
      public void ajouterAnnonce(Panier a) {
         ConnectionRequest con = new ConnectionRequest();
         String Url = "http://127.0.0.1:8000/panierApi/new?idProd="+ a.getIdProd()+"&nomProd="+a.getNomProd()+"&nomRef=" + a.getNomRef()+"&prix="+ a.getPrix() + "&img=" + a.getPhoto();
@@ -36,6 +37,7 @@ public class PanierService {
 
         });
         NetworkManager.getInstance().addToQueueAndWait(con);
+        
     }
      
      public ArrayList<Panier> parseListTaskJsonAnnoncePanier(String json) throws ParseException {
@@ -96,28 +98,34 @@ public class PanierService {
         return listAnnoncep;
     }
      
-      public void viderPanier() {
+      public boolean viderPanier() {
           ConnectionRequest con = new ConnectionRequest();
         String Url =("http://127.0.0.1:8000/panierApi/vider");
         con.setUrl(Url);
-        con.addResponseListener((e) -> {
-            String str = new String(con.getResponseData());
-            System.out.println("Probléme vider panier ");
-           System.out.println(str);
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                responseResult = con.getResponseCode() == 200; //Code HTTP 200 OK
+                con.removeResponseListener(this); //Supprimer cet actionListener
+            }
         });
         NetworkManager.getInstance().addToQueueAndWait(con);
+         return responseResult;
     }
       
-      public void supprimerAnnonce(int a) {
+      public boolean supprimerAnnonce(int a) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://127.0.0.1:8000/panierApi/delete_a?id="+a+"";
+        String Url = "http://127.0.0.1:8000/panierApi/delete_a/"+a;
         con.setUrl(Url);
-        con.addResponseListener((e) -> {
-            String str = new String(con.getResponseData());
-            //System.out.println(str);//Affichage de la réponse serveur sur la console
-
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                responseResult = con.getResponseCode() == 200; //Code HTTP 200 OK
+                con.removeResponseListener(this); //Supprimer cet actionListener
+            } 
         });
         NetworkManager.getInstance().addToQueueAndWait(con);
+         return responseResult;
     }
       
       public void ajouterCommande(Commande c) {
@@ -131,5 +139,15 @@ public class PanierService {
         });
         NetworkManager.getInstance().addToQueueAndWait(con);
     }
-     
+        public void payerCommande(Commande c) {
+        ConnectionRequest con = new ConnectionRequest();
+        String Url = "http://127.0.0.1:8000/commande/pay/"+c.getId();
+        con.setUrl(Url);
+        con.addResponseListener((e) -> {
+            String str = new String(con.getResponseData());
+            //System.out.println(str);//Affichage de la réponse serveur sur la console
+
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+    }
 }

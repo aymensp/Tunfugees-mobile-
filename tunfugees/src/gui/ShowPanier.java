@@ -62,7 +62,7 @@ private ArrayList<Panier> annoncesp = new ArrayList<>();
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-       
+        setUIID("SignUp");
         getContentPane().setScrollVisible(false);
 
         ButtonGroup bg = new ButtonGroup();
@@ -156,7 +156,7 @@ Button j = new Button("");
  Label lbl_desc1 = new Label("Description :");
   Label lbl_prix1 = new Label("Prix :");
                         Label lbl_name = new Label(a.getNomProd());
-                      
+                  //    Label lbl_name=new Label(a.get)
                         Label lbl_prix = new Label(Double.toString(a.getPrix()));
                         Button delete=new Button();
                         delete.setIcon(FontImage.createMaterial(FontImage.MATERIAL_DELETE, j.getUnselectedStyle()));
@@ -176,8 +176,7 @@ Button j = new Button("");
                         ls.add(v);
                         ls1.add(lbl_name1);
                         ls1.add(lbl_name);
-                        ls1.add(lbl_desc1);
-                    
+
                         ls1.add(lbl_prix1);
                         ls1.add(lbl_prix);
                         
@@ -194,6 +193,7 @@ Button j = new Button("");
                             @Override
                             public void actionPerformed(ActionEvent evt) {
                                 panierService.supprimerAnnonce(a.getId());
+                                
                                 Dialog.show("Information", "Article Supprimé du Panier", "OK", "Cancel");
                              //ls.setHidden(true);
                              ShowPanier r=new ShowPanier(res);
@@ -245,20 +245,22 @@ Button j = new Button("");
                 else
                 {
                   //   Dialog.show("succes","Commande Pasee", "OK", "Cancel"); 
+                    boolean ti;
                     
                  Commande c=new Commande("En cours",Utilisateur.current_user.getId(),prixtot);
                panierService.ajouterCommande(c);
-                panierService.viderPanier();
+              panierService.viderPanier();
                 
                           
                                    Random r = new Random();
                            String val = "" + r.nextInt(10000);
 
                       System.out.println("val  : " +val);
+                    
                          // Utilisateur.current_user.toString();
-                       /*      TwilioSMS s=new TwilioSMS("AC144a9fe7a1f7ae1f571704be8742a80c","2cffde90d972a3b28ecf61d6bfc972ce","+19073122199");
-                              s.sendSmsAsync("+21697142760","Confirmation de votre livraison Monsieur/Madame :"+Utilisateur.current_user.getNom()+" "+Utilisateur.current_user.getPrenom()+"Votre code  de commande est le suivant :"+val);
-                            */
+                             TwilioSMS s=new TwilioSMS("AC144a9fe7a1f7ae1f571704be8742a80c","2cffde90d972a3b28ecf61d6bfc972ce","+19073122199");
+                              s.sendSmsAsync("+216"+Utilisateur.current_user.getNumtel(),"Confirmation de votre Commande Monsieur/Madame :"+Utilisateur.current_user.getNom()+" "+Utilisateur.current_user.getPrenom()+"Votre code  de commande est le suivant :"+val);
+                            
                                          Button saveButton = new Button("Commands");
       
 Image img = QRMaker.QRCode(String.valueOf(Utilisateur.current_user.getNom()+" "+prixtot));

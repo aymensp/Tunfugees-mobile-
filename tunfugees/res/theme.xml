@@ -48,12 +48,14 @@
     <image name="facebook-login.png"  />
     <image name="facebook-logo.png" type="multi"  />
     <image name="fondsofien.jpg" type="multi"  />
+    <legacyFont name="Font 1" />
     <image name="imageRep2.png"  />
     <image name="liste.png"  />
     <image name="livraison.jpg"  />
     <image name="logoeco.png"  />
     <image name="mainmenu.png"  />
     <image name="modification.png"  />
+    <image name="Multi Image 1" type="multi"  />
     <image name="news-item-1.jpg"  />
     <image name="news-item-2.jpg"  />
     <image name="news-item-3.jpg"  />
@@ -131,8 +133,8 @@
         <val key="Button.sel#padding" value="2.0,2.0,2.0,2.0" />
         <val key="CenterLabel.align" value="4" />
         <val key="CenterLabel.bgImage" value="design-application-mobile-CME - Copy (2) - Copy.jpg" />
-        <val key="CenterLabel.bgType" value="1" />
-        <val key="CenterLabel.derive" value="Label" />
+        <val key="CenterLabel.bgType" value="33" />
+        <val key="CenterLabel.derive" value="CenterLabel" />
         <val key="CenterLink.align" value="4" />
         <val key="CenterLink.bgColor" value="99ff99" />
         <val key="CenterLink.fgColor" value="ffffff" />

@@ -5,6 +5,7 @@
  */
 package gui;
 
+import Utils.PDFHandler;
 import com.codename1.ui.util.Resources;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.ScaleImageLabel;
@@ -57,6 +58,7 @@ import com.codename1.payment.PurchaseCallback;
 import com.codename1.payment.ReceiptStore;
 import com.codename1.payment.RestoreCallback;
 import java.util.*;
+import services.ServiceUser;
 
 
 
@@ -68,6 +70,7 @@ public class CommandeForm extends BaseForm  {
      Resources res;
  Container cnt;
  ArrayList<Commande> listcmd = new ArrayList<>();
+ ServiceUser u=new ServiceUser();
     public CommandeForm(Resources res) {
         super("Commandes", BoxLayout.y());
          CommandeService commandeService = new CommandeService();
@@ -76,7 +79,7 @@ public class CommandeForm extends BaseForm  {
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-      //  setUIID("AllANnonces");
+        setUIID("SignUp");
         getContentPane().setScrollVisible(false);
         ButtonGroup bg = new ButtonGroup();
         int size = Display.getInstance().convertToPixels(1);
@@ -195,8 +198,9 @@ Button j = new Button("");
                         Label etat = new Label(a.getEtat_commande());
                         Label lbl_prix = new Label(Double.toString(a.getPrixTotal())+" DT");
                         Button delete=new Button("Annuler");
-                
-                        //delete.setIcon(FontImage.createMaterial(FontImage.MATERIAL_DELETE, j.getUnselectedStyle()));
+                        Button download = new Button("Imprimer");
+    download.setIcon(FontImage.createMaterial(FontImage.MATERIAL_LOCAL_PRINTSHOP, download.getUnselectedStyle()));
+                      //delete.setIcon(FontImage.createMaterial(FontImage.MATERIAL_DELETE, j.getUnselectedStyle()));
                        
                         date.getStyle().setFgColor(0x220000);
                         etat.getStyle().setFgColor(0x220000);
@@ -221,9 +225,12 @@ Button j = new Button("");
                         ls1.add(prixx);
                         ls1.add(lbl_prix);
                        // ls.add(livraison);
+                       
+                       
                         ls1.add(buttons);
                     
                         buttons.add(delete);
+                        buttons.add(download);
                         element.add(ls);
                         ls.add(ls1);
 
@@ -243,7 +250,21 @@ Button j = new Button("");
                                 
                             }
                         });
-                        
+                        download.addActionListener(e -> {
+        PDFHandler pdfh = new PDFHandler();
+       // commentairesP = FrmService.getAllCommentsByPublication(p.getId());
+       
+       Utilisateur ut = u.getUserData(a.getId_user());
+        pdfh.getFile("<br><br><br>"
+                + "<h2><center style=\"color: red;\">Commande de Mr/Mme" +ut.getNom()+ " " + ut.getPrenom()+"</center></h2><br>"
+                +"<h3> Passe le : "+a.getDate_emission().toString()+ "</h3><br>"
+                
+                +"<h3> Etat :</h3> "+a.getEtat_commande() + "<br>"
+                +"<h3> Prix Totale est :</h3> "+ String.valueOf(a.getPrixTotal()) + "  <br>"
+              
+                , "commande" + a.getId() + ".pdf");
+    });
+    
                       
                         
                       

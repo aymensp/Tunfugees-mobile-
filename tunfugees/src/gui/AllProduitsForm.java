@@ -197,17 +197,17 @@ public class AllProduitsForm extends BaseForm implements PushCallback {
                         Label lbl_name = new Label(a.getNomProd(),("CenterLabel"));
                         Label lbl_desc = new Label(a.getDescription());
                         Label lbl_prix = new Label(a.getPrix().toString()+" Dt",("CenterLabel"));
-                     
-                       
+                         Button details = new Button(); 
+                         
                         ls.add(v);
                             
                         ls1.add(lbl_name);
                       
                         ls1.add(lbl_prix);
-                             ls1.setLeadComponent(lbl_name);
+                        ls1.setLeadComponent(details);
                     
                         ls.add(ls1);
-                 
+                    
                        
                         element.add(ls);
                         
@@ -217,7 +217,7 @@ public class AllProduitsForm extends BaseForm implements PushCallback {
                         
                       
                         
-                        lbl_name.addPointerPressedListener(new ActionListener() {
+                        details.addPointerPressedListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent evt) {
                                 try {

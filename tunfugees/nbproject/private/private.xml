@@ -5,11 +5,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/aymen/Desktop/3em/mobile/tunfugees/src/entities/Refugies.java</file>
-            <file>jar:file:/C:/Users/aymen/Desktop/3em/mobile/tunfugees/lib/CodenameOne_SRC.zip!/com/codename1/components/FloatingHint.java</file>
             <file>file:/C:/Users/aymen/Desktop/3em/mobile/tunfugees/src/gui/DetailsRef.java</file>
+            <file>jar:file:/C:/Users/aymen/Desktop/3em/mobile/tunfugees/lib/CodenameOne_SRC.zip!/com/codename1/components/FloatingHint.java</file>
             <file>file:/C:/Users/aymen/Desktop/3em/mobile/tunfugees/src/gui/ListCatStock.java</file>
+            <file>file:/C:/Users/aymen/Desktop/3em/mobile/tunfugees/src/services/ServiceUser.java</file>
             <file>file:/C:/Users/aymen/Desktop/3em/mobile/tunfugees/src/gui/ListReclamations.java</file>
             <file>file:/C:/Users/aymen/Desktop/3em/mobile/tunfugees/src/gui/ShowProduitForm.java</file>
+            <file>file:/C:/Users/aymen/Desktop/3em/mobile/tunfugees/src/services/PanierService.java</file>
             <file>file:/C:/Users/aymen/Desktop/3em/mobile/tunfugees/src/gui/afficherrefugies.java</file>
         </group>
     </open-files>

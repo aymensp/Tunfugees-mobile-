@@ -55,7 +55,10 @@ public class ServiceUser {
         
           u.setRoles(obj.get("roles").toString());
            u.setPrenom(obj.get("prenom").toString());
-           u.setNumtel(obj.get("numero").toString());
+           
+              float num = Float.parseFloat(obj.get("numero").toString());
+            u.setNumtel((int) num);
+
            u.setNom(obj.get("nom").toString());
 
             //u.setProfilepicture("" + obj.get("profilePicture")); Au cas ou

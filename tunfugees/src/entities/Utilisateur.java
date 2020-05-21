@@ -59,7 +59,7 @@ public class Utilisateur {
     
     private String ville;
     
-    private String numtel;
+    private int numtel;
     
     private String nomPropriete;
     
@@ -248,11 +248,11 @@ public class Utilisateur {
         this.ville = ville;
     }
 
-    public String getNumtel() {
+    public int getNumtel() {
         return numtel;
     }
 
-    public void setNumtel(String numtel) {
+    public void setNumtel(int numtel) {
         this.numtel = numtel;
     }
 
